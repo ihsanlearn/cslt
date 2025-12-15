@@ -28,6 +28,20 @@
                                         </a>
                                     </h4>
                                     <p class="text-gray-600 mb-4">{{ Str::limit($category->description, 100) }}</p>
+
+                                    <div class="mb-4">
+                                        @php
+                                            $progress = $category->getUserProgress(auth()->user());
+                                        @endphp
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="text-xs font-semibold text-blue-700">Progress</span>
+                                            <span class="text-xs font-bold text-blue-700">{{ $progress }}%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ $progress }}%"></div>
+                                        </div>
+                                    </div>
+
                                     <div class="flex justify-between text-sm text-gray-500">
                                         <span>{{ $category->topics->count() }} Topics</span>
                                         <div>

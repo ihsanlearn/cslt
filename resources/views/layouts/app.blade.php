@@ -38,10 +38,10 @@
                         class="block py-2 text-gray-600 hover:text-blue-600 {{ request()->routeIs('dashboard') ? 'text-blue-600 font-semibold' : '' }}">Dashboard</a>
                     <a href="{{ route('categories.index') }}"
                         class="block py-2 text-gray-600 hover:text-blue-600 {{ request()->routeIs('categories.*') ? 'text-blue-600 font-semibold' : '' }}">All
-                        Categories</a>
+                        Learning</a>
 
                     <div class="mt-6">
-                        <h3 class="uppercase text-xs font-semibold text-gray-400 mb-2">My Categories</h3>
+                        <h3 class="uppercase text-xs font-semibold text-gray-400 mb-2">My Learning</h3>
                         <ul>
                             @foreach(\Illuminate\Support\Facades\Auth::user()->categories()->orderBy('name')->get() as $sidebarCategory)
                                 <li>

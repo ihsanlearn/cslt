@@ -16,14 +16,19 @@ class LearningProgressController extends Controller
 
         $validated = $request->validate([
             'status' => 'required|in:planned,learning,completed',
-            'percentage' => 'required|integer|min:0|max:100',
         ]);
+
+        $percentage = match ($validated['status']) {
+            'completed' => 100,
+            'learning' => 50,
+            default => 0,
+        };
 
         \App\Models\LearningProgress::updateOrCreate(
             ['user_id' => auth()->id(), 'topic_id' => $topic->id],
             [
                 'status' => $validated['status'],
-                'percentage' => $validated['percentage'],
+                'percentage' => $percentage,
                 'last_learned_at' => now(),
             ]
         );

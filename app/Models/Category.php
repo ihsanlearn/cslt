@@ -17,4 +17,20 @@ class Category extends Model
     {
         return $this->hasMany(Topic::class);
     }
+
+    public function getUserProgress(User $user)
+    {
+        $topics = $this->topics;
+        if ($topics->isEmpty()) {
+            return 0;
+        }
+
+        $totalProgress = 0;
+        foreach ($topics as $topic) {
+            $progress = $topic->learningProgress()->where('user_id', $user->id)->first();
+            $totalProgress += $progress ? $progress->percentage : 0;
+        }
+
+        return round($totalProgress / $topics->count());
+    }
 }

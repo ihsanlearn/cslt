@@ -41,12 +41,24 @@
                                         @php
                                             $progress = $topic->learningProgress()->where('user_id', auth()->id())->first();
                                             $status = $progress ? $progress->status : 'planned';
+                                            $percentage = $progress ? $progress->percentage : 0;
                                             $color = match ($status) {
                                                 'completed' => 'green',
                                                 'learning' => 'yellow',
                                                 default => 'gray'
                                             };
                                         @endphp
+
+                                        <div class="flex flex-col w-24">
+                                            <div class="flex justify-end text-xs mb-0.5">
+                                                <span class="text-gray-500 font-semibold">{{ $percentage }}%</span>
+                                            </div>
+                                            <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                                <div class="bg-{{ $color }}-600 h-1.5 rounded-full"
+                                                    style="width: {{ $percentage }}%"></div>
+                                            </div>
+                                        </div>
+
                                         <span class="text-xs uppercase font-bold text-{{ $color }}-600">
                                             {{ ucfirst($status) }}
                                         </span>

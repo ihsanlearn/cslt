@@ -26,7 +26,8 @@
                                         <a href="{{ route('notes.show', $note) }}" class="block">
                                             <h4 class="font-bold text-gray-800">{{ $note->title }}</h4>
                                             <p class="text-xs text-gray-500 mt-1">Updated
-                                                {{ $note->updated_at->diffForHumans() }}</p>
+                                                {{ $note->updated_at->diffForHumans() }}
+                                            </p>
                                         </a>
                                     </div>
                                 @endforeach
@@ -64,8 +65,10 @@
                             <div class="mb-4">
                                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Percentage:
                                     {{ $percentage }}%</label>
-                                <input type="range" name="percentage" min="0" max="100" value="{{ $percentage }}"
-                                    class="w-full" onchange="this.form.submit()">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                                    <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500"
+                                        style="width: {{ $percentage }}%"></div>
+                                </div>
                             </div>
                         </form>
                     </div>
